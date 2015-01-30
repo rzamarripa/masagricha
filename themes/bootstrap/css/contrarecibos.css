@@ -1,0 +1,8 @@
+.contrarecibo .proveedores {
+	width: 350px;
+}
+
+.contrarecibo td.facturas span, .contrarecibo td.fecha_facturas span {
+	display: block;
+	margin-bottom: 3px;
+} 

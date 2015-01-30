@@ -1,0 +1,16 @@
+tfoot.cotizacion tr > td:first-child {
+	text-align: right;
+}
+
+tfoot.cotizacion tr > td {
+	text-align: right;
+}
+
+td.total {
+	/*min-width: 60px;*/
+	/*text-align: right !important;*/
+}
+
+input.error {
+	border-color: #b94a48;
+}

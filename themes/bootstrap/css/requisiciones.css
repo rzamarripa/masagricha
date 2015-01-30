@@ -1,0 +1,11 @@
+.unidad {
+	width: 100px;
+}
+
+.material {
+	width: 350px;
+}
+
+.error .myselect2 {
+	border: 1px solid red;
+}

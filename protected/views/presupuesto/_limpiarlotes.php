@@ -1,0 +1,1 @@
+<span class="label label-success">Esta empresa no tiene lotes</span>
