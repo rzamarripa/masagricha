@@ -311,6 +311,7 @@
 					<?php $this->renderPartial("_graficageneral",array("presupuestoFormateado"=>$presupuestoFormateado, 'datos'=>$datos, 'valores'=>array("empresa" => "",
 																																																																								"grupoCostos" => ""))); ?>
 			</div>
+			<div style="text-align: right;"><a href="#" class="btn btn-info btn-mini" onclick="siguiente()">Siguiente >></a></div>
 		</div>
 	</div>
 <?php $this->endWidget(); ?>
@@ -327,3 +328,205 @@
 		<h4 id="nombreGrafica">Gráfica General</h4>
   </div>
 </div>
+
+<?php
+	$c= 0;
+	$configuracion = Configuracion::model()->find("estatus_did = 1 && descripcion='Actual'");
+?>
+
+<script type="text/javascript">
+
+   
+$(window).bind("load", function() {
+   // code here
+
+   $('#presupuesto_empresa').val(1);
+   var datosTodosAcum = {
+								empresa: $('#presupuesto_empresa').val(),
+								p: "<?php echo $configuracion->valor; ?>",
+								grupoCostos: $('#presupuesto_grupoCostos').val(),
+								semana: $('#presupuesto_semana').val(),
+								grafica: $('#tipoGrafica').html(),
+								acum:1,
+								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+							};
+   cargarlote(datosTodosAcum);
+
+
+});
+
+var 	soyunmarrano=0;
+function siguiente () {
+	soyunmarrano++;
+	if (soyunmarrano==11)
+	{
+		if($('#presupuesto_empresa').val()==1)
+			$('#presupuesto_empresa').val(2);
+		else
+			$('#presupuesto_empresa').val(1);
+		soyunmarrano=0;
+
+	}	
+		
+	if(soyunmarrano==0){
+		$('#menugrafica li:eq(0) a').tab('show');
+		$('#tipoGrafica').html('graficageneral');
+		$('#presupuesto_grupoCostos').val('');
+		var datosTodosAcum = {
+				empresa: $('#presupuesto_empresa').val(),
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: $('#presupuesto_grupoCostos').val(),
+				semana: $('#presupuesto_semana').val(),
+				grafica: $('#tipoGrafica').html(),
+				acum:1,						
+				semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+			};
+		   cargarlote(datosTodosAcum);
+	}else if(soyunmarrano==1){
+		$('#menugrafica li:eq(0) a').tab('show');
+		$('#tipoGrafica').html('graficageneral');
+		$('#presupuesto_grupoCostos').val('');
+		var datosTodosAcum = {
+				empresa: $('#presupuesto_empresa').val(),
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: $('#presupuesto_grupoCostos').val(),
+				semana: $('#presupuesto_semana').val(),
+				grafica: $('#tipoGrafica').html(),
+										
+				semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+			};
+		   cargarlote(datosTodosAcum);
+	}else if (soyunmarrano==2) {
+		$('#presupuesto_grupoCostos').val(1);
+		var datosTodosAcum = {
+								empresa: $('#presupuesto_empresa').val(),
+								p: "<?php echo $configuracion->valor; ?>",
+								grupoCostos: $('#presupuesto_grupoCostos').val(),
+								semana: $('#presupuesto_semana').val(),
+								grafica: $('#tipoGrafica').html(),
+								acum:1,
+								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+							};
+   		cargarlote(datosTodosAcum);
+	} else if (soyunmarrano==3) {
+		$('#presupuesto_grupoCostos').val(1);
+		var datosTodosAcum = {
+								empresa: $('#presupuesto_empresa').val(),
+								p: "<?php echo $configuracion->valor; ?>",
+								grupoCostos: $('#presupuesto_grupoCostos').val(),
+								semana: $('#presupuesto_semana').val(),
+								grafica: $('#tipoGrafica').html(),
+								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+							};
+   		cargarlote(datosTodosAcum);
+	}
+	else if (soyunmarrano==4) {
+		$('#presupuesto_grupoCostos').val(1);
+		$('#menugrafica li:eq(2) a').tab('show');
+		$('#tipoGrafica').html('lotetabular');
+		var datosTodosAcum = {
+								empresa: $('#presupuesto_empresa').val(),
+								p: "<?php echo $configuracion->valor; ?>",
+								grupoCostos: $('#presupuesto_grupoCostos').val(),
+								semana: $('#presupuesto_semana').val(),
+								grafica: $('#tipoGrafica').html(),
+								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+							};
+   		cargarlote(datosTodosAcum);
+	}  
+	else if (soyunmarrano==5) {
+		$('#presupuesto_grupoCostos').val(4);
+		$('#menugrafica li:eq(0) a').tab('show');
+		$('#tipoGrafica').html('graficageneral');
+		var datosTodosAcum = {
+								empresa: $('#presupuesto_empresa').val(),
+								p: "<?php echo $configuracion->valor; ?>",
+								grupoCostos: $('#presupuesto_grupoCostos').val(),
+								semana: $('#presupuesto_semana').val(),
+								grafica: $('#tipoGrafica').html(),
+								acum:1,
+								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+							};
+   		cargarlote(datosTodosAcum);
+	}
+	else if (soyunmarrano==6) {
+		$('#presupuesto_grupoCostos').val(4);
+		$('#menugrafica li:eq(0) a').tab('show');
+		$('#tipoGrafica').html('graficageneral');
+		var datosTodosAcum = {
+								empresa: $('#presupuesto_empresa').val(),
+								p: "<?php echo $configuracion->valor; ?>",
+								grupoCostos: $('#presupuesto_grupoCostos').val(),
+								semana: $('#presupuesto_semana').val(),
+								grafica: $('#tipoGrafica').html(),
+
+								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+							};
+   		cargarlote(datosTodosAcum);
+	}
+	else if (soyunmarrano==7) {
+		$('#presupuesto_grupoCostos').val(4);
+		$('#menugrafica li:eq(2) a').tab('show');
+		$('#tipoGrafica').html('lotetabular');
+		var datosTodosAcum = {
+								empresa: $('#presupuesto_empresa').val(),
+								p: "<?php echo $configuracion->valor; ?>",
+								grupoCostos: $('#presupuesto_grupoCostos').val(),
+								semana: $('#presupuesto_semana').val(),
+								grafica: $('#tipoGrafica').html(),
+								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+							};
+   		cargarlote(datosTodosAcum);
+	}
+	else if (soyunmarrano==8) {
+		$('#presupuesto_grupoCostos').val(5);
+		$('#menugrafica li:eq(0) a').tab('show');
+		$('#tipoGrafica').html('graficageneral');
+		var datosTodosAcum = {
+								empresa: $('#presupuesto_empresa').val(),
+								p: "<?php echo $configuracion->valor; ?>",
+								grupoCostos: $('#presupuesto_grupoCostos').val(),
+								semana: $('#presupuesto_semana').val(),
+								grafica: $('#tipoGrafica').html(),
+								acum:1,
+								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+							};
+   		cargarlote(datosTodosAcum);
+	}
+	else if (soyunmarrano==9) {
+		$('#presupuesto_grupoCostos').val(5);
+		$('#menugrafica li:eq(0) a').tab('show');
+		$('#tipoGrafica').html('graficageneral');
+		var datosTodosAcum = {
+								empresa: $('#presupuesto_empresa').val(),
+								p: "<?php echo $configuracion->valor; ?>",
+								grupoCostos: $('#presupuesto_grupoCostos').val(),
+								semana: $('#presupuesto_semana').val(),
+								grafica: $('#tipoGrafica').html(),
+
+								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+							};
+   		cargarlote(datosTodosAcum);
+	}
+	else if (soyunmarrano==10) {
+		$('#presupuesto_grupoCostos').val(5);
+		$('#menugrafica li:eq(2) a').tab('show');
+		$('#tipoGrafica').html('lotetabular');
+		var datosTodosAcum = {
+								empresa: $('#presupuesto_empresa').val(),
+								p: "<?php echo $configuracion->valor; ?>",
+								grupoCostos: $('#presupuesto_grupoCostos').val(),
+								semana: $('#presupuesto_semana').val(),
+								grafica: $('#tipoGrafica').html(),
+								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+							};
+   		cargarlote(datosTodosAcum);
+	}  
+	
+}
+
+
+
+ 
+
+</script>

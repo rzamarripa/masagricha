@@ -247,6 +247,7 @@ class PresupuestoController extends Controller
 											)")->queryScalar();
 		}
 		$presupuestos["semana"] = "";
+	
 		$this->render("presupuestos",array("configuracion"=>$configuracion, "presupuestoFormateado"=>$presupuestoFormateado, "presupuestos"=>$presupuestos, "datos"=>$datos));
 	}
 
