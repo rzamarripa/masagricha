@@ -348,7 +348,7 @@ $(window).bind("load", function() {
 								semana: $('#presupuesto_semana').val(),
 								grafica: $('#tipoGrafica').html(),
 								acum:1,
-								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+								semana: "",
 							};
    cargarlote(datosTodosAcum);
 
@@ -379,7 +379,7 @@ function siguiente () {
 				semana: $('#presupuesto_semana').val(),
 				grafica: $('#tipoGrafica').html(),
 				acum:1,						
-				semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+				semana: "",
 			};
 		   cargarlote(datosTodosAcum);
 	}else if(soyunmarrano==1){
@@ -393,7 +393,7 @@ function siguiente () {
 				semana: $('#presupuesto_semana').val(),
 				grafica: $('#tipoGrafica').html(),
 										
-				semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+				semana: "",
 			};
 		   cargarlote(datosTodosAcum);
 	}else if (soyunmarrano==2) {
@@ -405,7 +405,7 @@ function siguiente () {
 								semana: $('#presupuesto_semana').val(),
 								grafica: $('#tipoGrafica').html(),
 								acum:1,
-								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+								semana: "",
 							};
    		cargarlote(datosTodosAcum);
 	} else if (soyunmarrano==3) {
@@ -416,7 +416,7 @@ function siguiente () {
 								grupoCostos: $('#presupuesto_grupoCostos').val(),
 								semana: $('#presupuesto_semana').val(),
 								grafica: $('#tipoGrafica').html(),
-								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+								semana: "",
 							};
    		cargarlote(datosTodosAcum);
 	}
@@ -430,7 +430,7 @@ function siguiente () {
 								grupoCostos: $('#presupuesto_grupoCostos').val(),
 								semana: $('#presupuesto_semana').val(),
 								grafica: $('#tipoGrafica').html(),
-								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+								semana: "",
 							};
    		cargarlote(datosTodosAcum);
 	}  
@@ -445,7 +445,7 @@ function siguiente () {
 								semana: $('#presupuesto_semana').val(),
 								grafica: $('#tipoGrafica').html(),
 								acum:1,
-								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+								semana: "",
 							};
    		cargarlote(datosTodosAcum);
 	}
@@ -460,7 +460,7 @@ function siguiente () {
 								semana: $('#presupuesto_semana').val(),
 								grafica: $('#tipoGrafica').html(),
 
-								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+								semana: "",
 							};
    		cargarlote(datosTodosAcum);
 	}
@@ -474,7 +474,7 @@ function siguiente () {
 								grupoCostos: $('#presupuesto_grupoCostos').val(),
 								semana: $('#presupuesto_semana').val(),
 								grafica: $('#tipoGrafica').html(),
-								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+								semana: "",
 							};
    		cargarlote(datosTodosAcum);
 	}
@@ -489,7 +489,7 @@ function siguiente () {
 								semana: $('#presupuesto_semana').val(),
 								grafica: $('#tipoGrafica').html(),
 								acum:1,
-								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+								semana: "",
 							};
    		cargarlote(datosTodosAcum);
 	}
@@ -504,7 +504,7 @@ function siguiente () {
 								semana: $('#presupuesto_semana').val(),
 								grafica: $('#tipoGrafica').html(),
 
-								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+								semana: "",
 							};
    		cargarlote(datosTodosAcum);
 	}
@@ -518,7 +518,7 @@ function siguiente () {
 								grupoCostos: $('#presupuesto_grupoCostos').val(),
 								semana: $('#presupuesto_semana').val(),
 								grafica: $('#tipoGrafica').html(),
-								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
+								semana: "",
 							};
    		cargarlote(datosTodosAcum);
 	}  
