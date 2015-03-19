@@ -30,7 +30,10 @@ function cargarlote(data){
 				console.log('mensaje ' + errorThrown);
 	    }
 	});
-	event.preventDefault();
+	try{
+		event.preventDefault();
+	}
+	catch(err) {}
 }
 
 function cargarcultivo(data){
@@ -61,5 +64,8 @@ function cargarcultivo(data){
 								console.log('mensaje ' + errorThrown);
 					    }
 	});
-	event.preventDefault();
+	try{
+		event.preventDefault();
+	}
+	catch(err) {}
 }

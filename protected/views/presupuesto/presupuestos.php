@@ -311,7 +311,14 @@
 					<?php $this->renderPartial("_graficageneral",array("presupuestoFormateado"=>$presupuestoFormateado, 'datos'=>$datos, 'valores'=>array("empresa" => "",
 																																																																								"grupoCostos" => ""))); ?>
 			</div>
-			<div style="text-align: right;"><a href="#" class="btn btn-info btn-mini" onclick="siguiente()">Siguiente >></a></div>
+			<div style="text-align: right;">
+				<a id="atras_boton" href="#" class="btn btn-info btn-mini" onclick="atras()">&#60;&#60;Anterior</a>
+				<a id="adelante_boton" href="#" class="btn btn-info btn-mini" onclick="siguiente()">Siguiente >></a>
+
+			</div>
+
+			
+
 		</div>
 	</div>
 <?php $this->endWidget(); ?>
@@ -351,180 +358,217 @@ $(window).bind("load", function() {
 								semana: "",
 							};
    cargarlote(datosTodosAcum);
+   $('#atras_boton').hide();
 
 
 });
 
-var 	soyunmarrano=0;
-function siguiente () {
-	soyunmarrano++;
-	if (soyunmarrano==11)
-	{
-		if($('#presupuesto_empresa').val()==1)
-			$('#presupuesto_empresa').val(2);
-		else
-			$('#presupuesto_empresa').val(1);
-		soyunmarrano=0;
-
-	}	
-		
-	if(soyunmarrano==0){
-		$('#menugrafica li:eq(0) a').tab('show');
-		$('#tipoGrafica').html('graficageneral');
-		$('#presupuesto_grupoCostos').val('');
-		var datosTodosAcum = {
-				empresa: $('#presupuesto_empresa').val(),
+var estados=[
+			{
+				empresa: 1,
 				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: $('#presupuesto_grupoCostos').val(),
-				semana: $('#presupuesto_semana').val(),
-				grafica: $('#tipoGrafica').html(),
+				grupoCostos: "",
+				grafica: "graficageneral",
 				acum:1,						
 				semana: "",
-			};
-		   cargarlote(datosTodosAcum);
-	}else if(soyunmarrano==1){
-		$('#menugrafica li:eq(0) a').tab('show');
-		$('#tipoGrafica').html('graficageneral');
-		$('#presupuesto_grupoCostos').val('');
-		var datosTodosAcum = {
-				empresa: $('#presupuesto_empresa').val(),
+			},
+			{
+				empresa: 1,
 				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: $('#presupuesto_grupoCostos').val(),
-				semana: $('#presupuesto_semana').val(),
-				grafica: $('#tipoGrafica').html(),
-										
+				grupoCostos: "",
+				grafica: "graficageneral",
 				semana: "",
-			};
-		   cargarlote(datosTodosAcum);
-	}else if (soyunmarrano==2) {
-		$('#presupuesto_grupoCostos').val(1);
-		var datosTodosAcum = {
-								empresa: $('#presupuesto_empresa').val(),
-								p: "<?php echo $configuracion->valor; ?>",
-								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
-								grafica: $('#tipoGrafica').html(),
-								acum:1,
-								semana: "",
-							};
-   		cargarlote(datosTodosAcum);
-	} else if (soyunmarrano==3) {
-		$('#presupuesto_grupoCostos').val(1);
-		var datosTodosAcum = {
-								empresa: $('#presupuesto_empresa').val(),
-								p: "<?php echo $configuracion->valor; ?>",
-								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
-								grafica: $('#tipoGrafica').html(),
-								semana: "",
-							};
-   		cargarlote(datosTodosAcum);
-	}
-	else if (soyunmarrano==4) {
-		$('#presupuesto_grupoCostos').val(1);
-		$('#menugrafica li:eq(2) a').tab('show');
-		$('#tipoGrafica').html('lotetabular');
-		var datosTodosAcum = {
-								empresa: $('#presupuesto_empresa').val(),
-								p: "<?php echo $configuracion->valor; ?>",
-								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
-								grafica: $('#tipoGrafica').html(),
-								semana: "",
-							};
-   		cargarlote(datosTodosAcum);
-	}  
-	else if (soyunmarrano==5) {
-		$('#presupuesto_grupoCostos').val(4);
-		$('#menugrafica li:eq(0) a').tab('show');
-		$('#tipoGrafica').html('graficageneral');
-		var datosTodosAcum = {
-								empresa: $('#presupuesto_empresa').val(),
-								p: "<?php echo $configuracion->valor; ?>",
-								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
-								grafica: $('#tipoGrafica').html(),
-								acum:1,
-								semana: "",
-							};
-   		cargarlote(datosTodosAcum);
-	}
-	else if (soyunmarrano==6) {
-		$('#presupuesto_grupoCostos').val(4);
-		$('#menugrafica li:eq(0) a').tab('show');
-		$('#tipoGrafica').html('graficageneral');
-		var datosTodosAcum = {
-								empresa: $('#presupuesto_empresa').val(),
-								p: "<?php echo $configuracion->valor; ?>",
-								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
-								grafica: $('#tipoGrafica').html(),
+			},
+			{
+				empresa: 1,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 1,
+				grafica: "graficageneral",
+				acum:1,						
+				semana: "",
+			},
+			{
+				empresa: 1,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 1,
+				grafica: "graficageneral",
+				semana: "",
+			},
+			{
+				empresa: 1,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 1,
+				grafica: "lotetabular",
+				semana: "",
+			},
+			{
+				empresa: 1,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 4,
+				grafica: "graficageneral",
+				acum:1,						
+				semana: "",
+			},
+			{
+				empresa: 1,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 4,
+				grafica: "graficageneral",
+				semana: "",
+			},
+			{
+				empresa: 1,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 4,
+				grafica: "lotetabular",
+				semana: "",
+			},
+			{
+				empresa: 1,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 5,
+				grafica: "graficageneral",
+				acum:1,						
+				semana: "",
+			},
+			{
+				empresa: 1,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 5,
+				grafica: "graficageneral",
+				semana: "",
+			},
+			{
+				empresa: 1,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 5,
+				grafica: "lotetabular",
+				semana: "",
+			},
 
-								semana: "",
-							};
-   		cargarlote(datosTodosAcum);
-	}
-	else if (soyunmarrano==7) {
-		$('#presupuesto_grupoCostos').val(4);
-		$('#menugrafica li:eq(2) a').tab('show');
-		$('#tipoGrafica').html('lotetabular');
-		var datosTodosAcum = {
-								empresa: $('#presupuesto_empresa').val(),
-								p: "<?php echo $configuracion->valor; ?>",
-								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
-								grafica: $('#tipoGrafica').html(),
-								semana: "",
-							};
-   		cargarlote(datosTodosAcum);
-	}
-	else if (soyunmarrano==8) {
-		$('#presupuesto_grupoCostos').val(5);
-		$('#menugrafica li:eq(0) a').tab('show');
-		$('#tipoGrafica').html('graficageneral');
-		var datosTodosAcum = {
-								empresa: $('#presupuesto_empresa').val(),
-								p: "<?php echo $configuracion->valor; ?>",
-								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
-								grafica: $('#tipoGrafica').html(),
-								acum:1,
-								semana: "",
-							};
-   		cargarlote(datosTodosAcum);
-	}
-	else if (soyunmarrano==9) {
-		$('#presupuesto_grupoCostos').val(5);
-		$('#menugrafica li:eq(0) a').tab('show');
-		$('#tipoGrafica').html('graficageneral');
-		var datosTodosAcum = {
-								empresa: $('#presupuesto_empresa').val(),
-								p: "<?php echo $configuracion->valor; ?>",
-								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
-								grafica: $('#tipoGrafica').html(),
 
-								semana: "",
-							};
-   		cargarlote(datosTodosAcum);
+
+			{
+				empresa: 2,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: "",
+				grafica: "graficageneral",
+				acum:1,						
+				semana: "",
+			},
+			{
+				empresa: 2,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: "",
+				grafica: "graficageneral",
+				semana: "",
+			},
+			{
+				empresa: 2,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 1,
+				grafica: "graficageneral",
+				acum:1,						
+				semana: "",
+			},
+			{
+				empresa: 2,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 1,
+				grafica: "graficageneral",
+				semana: "",
+			},
+			{
+				empresa: 2,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 1,
+				grafica: "lotetabular",
+				semana: "",
+			},
+			{
+				empresa: 2,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 4,
+				grafica: "graficageneral",
+				acum:1,						
+				semana: "",
+			},
+			{
+				empresa: 2,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 4,
+				grafica: "graficageneral",
+				semana: "",
+			},
+			{
+				empresa: 2,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 4,
+				grafica: "lotetabular",
+				semana: "",
+			},
+			{
+				empresa: 2,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 5,
+				grafica: "graficageneral",
+				acum:1,						
+				semana: "",
+			},
+			{
+				empresa: 2,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 5,
+				grafica: "graficageneral",
+				semana: "",
+			},
+			{
+				empresa: 2,
+				p: "<?php echo $configuracion->valor; ?>",
+				grupoCostos: 5,
+				grafica: "lotetabular",
+				semana: "",
+			}
+
+];
+
+var 	estadoid=0;
+
+function actualizar_estado () {
+	// body...
+	if (estados[estadoid].grafica== 'lotetabular') {
+		$('#menugrafica li:eq(2) a').tab('show');	
 	}
-	else if (soyunmarrano==10) {
-		$('#presupuesto_grupoCostos').val(5);
-		$('#menugrafica li:eq(2) a').tab('show');
-		$('#tipoGrafica').html('lotetabular');
-		var datosTodosAcum = {
-								empresa: $('#presupuesto_empresa').val(),
-								p: "<?php echo $configuracion->valor; ?>",
-								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
-								grafica: $('#tipoGrafica').html(),
-								semana: "",
-							};
-   		cargarlote(datosTodosAcum);
-	}  
+	else{
+		$('#menugrafica li:eq(0) a').tab('show');	
+
+	}
+	$('#tipoGrafica').html(estados[estadoid].grafica);
+	$('#presupuesto_grupoCostos').val(estados[estadoid].grupoCostos);
+	cargarlote(estados[estadoid]);
+}
+function siguiente () {
+	if (estadoid<21) {
+		estadoid++;
+		$('#atras_boton').show();
+	}
+	if(estadoid==21){
+		$('#adelante_boton').hide();
+	}
+	actualizar_estado ();
 	
 }
-
+function atras () {
+	if (estadoid>0) {
+		estadoid--;
+		$('#adelante_boton').show();
+	}
+	if(estadoid==0){
+		$('#atras_boton').hide();
+	}
+	actualizar_estado ();
+	
+}
 
 
  
