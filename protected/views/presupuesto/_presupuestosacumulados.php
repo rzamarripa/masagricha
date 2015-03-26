@@ -4,9 +4,10 @@
 	$porcentajeActual = (($presupuestosacumulados["Actual"] / $presupuestosacumulados["Presupuesto"]) - 1) * 100;
 	$porcentajeAnterior = (($presupuestosacumulados["Actual"] / $presupuestosacumulados["Anterior"]) - 1) * 100;
 	//((13500) (100)) /12500 = 108 -100
-	if($porcentajeActual < -16){
+	
+	if($porcentajeActual <= -16){
 		$claseActual = "text-warning";
-	}else if($porcentajeActual >= -15 && $porcentajeActual < 11){
+	}else if($porcentajeActual > -16 && $porcentajeActual < 11){
 		$claseActual = "text-success";
 	}else if($porcentajeActual >= 11){
 		$claseActual = "text-error";

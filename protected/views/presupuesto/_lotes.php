@@ -34,7 +34,7 @@
 								empresa: $('#presupuesto_empresa').val(),
 								p: "<?php echo $configuracion->valor; ?>",
 								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
+								semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
 								grafica: $('#tipoGrafica').html(),
 								lote: <?php echo $lote["lote"]; ?>,
 							};
@@ -43,7 +43,7 @@
 								empresa: $('#presupuesto_empresa').val(),
 								p: "<?php echo $configuracion->valor; ?>",
 								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
+								semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",
 								grafica: $('#tipoGrafica').html(),
 								lote: <?php echo $lote["lote"]; ?>,
 								acum:1,
@@ -53,7 +53,7 @@
 								empresa: $('#presupuesto_empresa').val(),
 								p: "<?php echo $configuracion->valor; ?>",
 								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
+								
 								grafica: $('#tipoGrafica').html(),
 								acum:1,
 								semana: "<?php echo Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar(); ?>",

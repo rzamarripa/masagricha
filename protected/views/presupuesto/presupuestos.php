@@ -352,10 +352,10 @@ $(window).bind("load", function() {
 								empresa: $('#presupuesto_empresa').val(),
 								p: "<?php echo $configuracion->valor; ?>",
 								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val(),
+								semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 								grafica: $('#tipoGrafica').html(),
 								acum:1,
-								semana: "",
+								semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 							};
    cargarlote(datosTodosAcum);
    $('#atras_boton').hide();
@@ -370,14 +370,14 @@ var estados=[
 				grupoCostos: "",
 				grafica: "graficageneral",
 				acum:1,						
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 1,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: "",
 				grafica: "graficageneral",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 1,
@@ -385,21 +385,21 @@ var estados=[
 				grupoCostos: 1,
 				grafica: "graficageneral",
 				acum:1,						
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 1,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 1,
 				grafica: "graficageneral",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 1,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 1,
 				grafica: "lotetabular",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 1,
@@ -407,21 +407,21 @@ var estados=[
 				grupoCostos: 4,
 				grafica: "graficageneral",
 				acum:1,						
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 1,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 4,
 				grafica: "graficageneral",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 1,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 4,
 				grafica: "lotetabular",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 1,
@@ -429,21 +429,21 @@ var estados=[
 				grupoCostos: 5,
 				grafica: "graficageneral",
 				acum:1,						
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 1,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 5,
 				grafica: "graficageneral",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 1,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 5,
 				grafica: "lotetabular",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 
 
@@ -454,14 +454,14 @@ var estados=[
 				grupoCostos: "",
 				grafica: "graficageneral",
 				acum:1,						
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 2,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: "",
 				grafica: "graficageneral",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 2,
@@ -469,21 +469,21 @@ var estados=[
 				grupoCostos: 1,
 				grafica: "graficageneral",
 				acum:1,						
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 2,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 1,
 				grafica: "graficageneral",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 2,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 1,
 				grafica: "lotetabular",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 2,
@@ -491,21 +491,21 @@ var estados=[
 				grupoCostos: 4,
 				grafica: "graficageneral",
 				acum:1,						
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 2,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 4,
 				grafica: "graficageneral",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 2,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 4,
 				grafica: "lotetabular",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 2,
@@ -513,21 +513,21 @@ var estados=[
 				grupoCostos: 5,
 				grafica: "graficageneral",
 				acum:1,						
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 2,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 5,
 				grafica: "graficageneral",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			},
 			{
 				empresa: 2,
 				p: "<?php echo $configuracion->valor; ?>",
 				grupoCostos: 5,
 				grafica: "lotetabular",
-				semana: "",
+				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
 			}
 
 ];
@@ -543,6 +543,7 @@ function actualizar_estado () {
 		$('#menugrafica li:eq(0) a').tab('show');	
 
 	}
+	estados[estadoid].semana=$('#presupuesto_semana').val(); 
 	$('#tipoGrafica').html(estados[estadoid].grafica);
 	$('#presupuesto_grupoCostos').val(estados[estadoid].grupoCostos);
 	cargarlote(estados[estadoid]);
