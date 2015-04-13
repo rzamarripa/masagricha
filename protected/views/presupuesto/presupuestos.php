@@ -117,7 +117,7 @@
 				</div>
 				<div class="span3">
 					<?php echo CHtml::dropDownList("presupuesto[semana]", '',
-              CHtml::listData(Periodos::model()->findAll(), 'id', 'semana'),
+              CHtml::listData(Periodos::model()->findAll(), 'semana', 'semana'),
               			array("class"=>'span2',
               			'ajax' => array(
                     'type'=>'POST', //request type
@@ -543,7 +543,7 @@ function actualizar_estado () {
 		$('#menugrafica li:eq(0) a').tab('show');	
 
 	}
-	estados[estadoid].semana=$('#presupuesto_semana').val(); 
+	estados[estadoid].semana = $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>"; 
 	$('#tipoGrafica').html(estados[estadoid].grafica);
 	$('#presupuesto_grupoCostos').val(estados[estadoid].grupoCostos);
 	cargarlote(estados[estadoid]);

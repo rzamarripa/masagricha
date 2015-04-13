@@ -1,4 +1,10 @@
-<?php
+<?php	
+	/*$diferenciaActual =  $presupuestosacumulados["Actual"] - $presupuestosacumulados["Presupuesto"];
+	$diferenciaAnterior = $presupuestosacumulados["Actual"] - $presupuestosacumulados["Anterior"];
+	$porcentajeActual = 100+((($presupuestosacumulados["Actual"]/ $presupuestosacumulados["Presupuesto"]) - 1) * 100);
+	$porcentajeAnterior = 100+((($diferenciaAnterior / $presupuestosacumulados["Anterior"]) - 1) * 100);
+	*/
+
 	$diferenciaActual =  $presupuestosacumulados["Actual"] - $presupuestosacumulados["Presupuesto"];
 	$diferenciaAnterior = $presupuestosacumulados["Actual"] - $presupuestosacumulados["Anterior"];
 	$porcentajeActual = (($presupuestosacumulados["Actual"] / $presupuestosacumulados["Presupuesto"]) - 1) * 100;

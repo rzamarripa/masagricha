@@ -277,24 +277,24 @@ class PresupuestoController extends Controller
 											from Superficies s where " . $sqlempresasuperficie . "
 											group by s.lote_did
 											order by s.empresa_did, s.lote_did;";
-		$lotesSuperficies = Yii::app()->db->createCommand($sqlSuperficies)->queryAll();//Aquí Ordené los lotes
+		$lotesSuperficies = Yii::app()->db->createCommand($sqlSuperficies)->queryAll(); //Aquí Ordené los lotes
 		
 		if(empty($valores["empresa"])){
 			$sqlempresalotes = "";			
 		}else{
 			if(empty($valores["semana"])){
-				$sqlempresalotes = "empresa_did = " . $empresa. " and ";
+				$sqlempresalotes = "p.empresa_did = " . $empresa. " and ";
 			}else{
-				$sqlempresalotes = "empresa_did = " . $empresa;
+				$sqlempresalotes = "p.empresa_did = " . $empresa;
 			}			
 		}
 		$semanaActualLotes = Yii::app()->db->createCommand("SELECT semana FROM SemanaActual")->queryScalar();
 		
 		if(isset($valores["acum"])){
 			if(empty($valores["semana"]) && empty($valores["grupoCostos"])){
-				$sqlsemanalotes = "";
+				$sqlsemanalotes = ' semana <= ' . $semanaActualLotes . " and ";
 			}else if(empty($valores["semana"]) && !empty($valores["grupoCostos"])){
-				$sqlsemanalotes = " grupoCostos_did = " . $valores["grupoCostos"] . " and ";
+				$sqlsemanalotes = ' semana <= ' . $semanaActualLotes . " and "." grupoCostos_did = " . $valores["grupoCostos"] . " and ";
 			}else if(empty($valores["empresa"])){
 				$sqlsemanalotes = ' semana <= ' . $semanaActualLotes . " and ";
 			}else{
@@ -306,9 +306,9 @@ class PresupuestoController extends Controller
 			}
 		}else{
 			if(empty($valores["semana"]) && empty($valores["grupoCostos"])){
-				$sqlsemanalotes = "";
+				$sqlsemanalotes = ' semana <= ' . $semanaActualLotes . " and ";
 			}else if(empty($valores["semana"]) && !empty($valores["grupoCostos"])){
-				$sqlsemanalotes = " grupoCostos_did = " . $valores["grupoCostos"] . " and ";
+				$sqlsemanalotes = ' semana <= ' . $semanaActualLotes . " and "." grupoCostos_did = " . $valores["grupoCostos"] . " and ";
 			}else if(empty($valores["empresa"])){
 				$sqlsemanalotes = ' semana = ' . $valores["semana"] . " and ";
 			}else{
@@ -319,19 +319,37 @@ class PresupuestoController extends Controller
 				}			
 			}
 		}
+		//La gráfica de producción es Lote
+		if($valores["grupoCostos"] == ""){
+			if($valores["grafica"] == "graficageneral"){
+				$grupoCostosActualLote = "";
+			}else if($valores["grafica"] == "lote"){
+				$grupoCostosActualLote = ' and (p.grupoCostos_did = 1 || p.grupoCostos_did = 4 || p.grupoCostos_did = 5) ';
+			}
+		}else{
+			$grupoCostosActualLote = " grupoCostos_did = " . $valores["grupoCostos"] . " and ";
+		}		
+		
 				
 		foreach($lotesSuperficies as $superficie){
+
 			$loteActual = Lotes::model()->find("id = " . $superficie["lote_did"]);
 			$sup = Superficies::model()->find("temporada = '1415' and lote_did = " . $loteActual->id);
-			$sqlimportes = "select temporada, sum(importe) importe from Presupuesto 
+			/*$sqlimportes = "select temporada, sum(importe) importe from Presupuesto 
 																								where " . $sqlempresalotes . $sqlsemanalotes . " superficie_did = " . $sup->id . " 
-																								group by temporada order by temporada;";
-			
+																								group by temporada order by temporada;";*/
+			$sqlimportes = "select p.temporada, sum(p.importe) importe from Presupuesto p
+																								inner join superficies as s on s.id = p.superficie_did
+																								where " . $sqlempresalotes . $sqlsemanalotes . " s.lote_did = " . $loteActual->id . " 
+																								group by p.temporada order by temporada;";
+
 			$importes = Yii::app()->db->createCommand($sqlimportes)->queryAll();
-			
+
 			$porcentaje = 0;
 			if(isset($importes[0]["importe"]) && isset($importes[1]["importe"])){
-				$porcentaje = (($importes[1]["importe"] / $importes[0]["importe"])-1) * 100;
+				//echo count($importes);
+				$porcentaje = ($importes[count($importes)-1]["importe"] - $importes[0]["importe"])/$importes[0]["importe"] * 100;
+				//$porcentaje = (($importes[1]["importe"] / $importes[0]["importe"])-1) * 100;
 			}else{
 				$porcentaje = 0;
 			}
@@ -360,7 +378,7 @@ class PresupuestoController extends Controller
 				}
 			}
 		}
-		
+
 		//Aquí inicia presupuestos acumulados
 		$configuracion = Configuracion::model()->findAll("estatus_did = 1");
 		$presupuestos = array();
