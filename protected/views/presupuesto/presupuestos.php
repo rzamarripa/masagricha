@@ -341,219 +341,101 @@
 	$configuracion = Configuracion::model()->find("estatus_did = 1 && descripcion='Actual'");
 ?>
 
+
 <script type="text/javascript">
 
-   
-$(window).bind("load", function() {
-   // code here
+<?php 
+	$recorrido = Recorrido::model()->findAll();
 
-   $('#presupuesto_empresa').val(1);
-   var datosTodosAcum = {
-								empresa: $('#presupuesto_empresa').val(),
-								p: "<?php echo $configuracion->valor; ?>",
-								grupoCostos: $('#presupuesto_grupoCostos').val(),
-								semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-								grafica: $('#tipoGrafica').html(),
-								acum:1,
-								semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-							};
-   cargarlote(datosTodosAcum);
-   $('#atras_boton').hide();
+	$pasos=array();
+	
+	echo "var estados=[\n";
+	foreach ($recorrido as $paso) {
+		echo "\t\t{\n";
+		echo "\t\t\tempresa:".(is_null($paso->empresa)? '""': $paso->empresa).",\n";
+		echo "\t\t\tp:\"".$configuracion->valor."\",\n";
+		echo "\t\t\tgrupoCostos:".(is_null($paso->grupoCostos)? '""': $paso->grupoCostos).",\n";
+		echo "\t\t\tgrafica:\"".(is_null($paso->grafica)? '': $paso->grafica)."\",\n";
+		if(!empty($paso->acum))
+		echo "\t\t\tacum:".(empty($paso->acum)? '""': $paso->acum).",\n";
+		if(!empty($paso->cultivo))
+		echo "\t\t\tcultivo:".(empty($paso->cultivo)? '""': $paso->cultivo).",\n";
+		echo "\t\t\tdescripcion:\"".(is_null($paso->descripcion)? '': $paso->descripcion)."\",\n";
+		echo "\t\t\tsemana: $('#presupuesto_semana').val()!=\"\"? $('#presupuesto_semana').val():".'"'.$semanaActual.'"'."\n";
+		$pasos[] = [
+			'empresa'=> is_null($paso->empresa)? "": $paso->empresa,
+			'p'=> $configuracion->valor,
+			'grupoCostos'=>is_null($paso->grupoCostos)? "": $paso->grupoCostos,
+			'grafica'=>is_null($paso->grafica)? "": $paso->grafica,
+			'acum'=>is_null($paso->acum)? "": $paso->acum,
+			'descripcion'=>is_null($paso->descripcion)? "": $paso->descripcion,
+			'semana'=> '',
+		];
+		echo "\t\t},\n";
 
-
-});
-
-var estados=[
-			{
-				empresa: 1,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: "",
-				grafica: "graficageneral",
-				acum:1,						
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 1,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: "",
-				grafica: "graficageneral",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 1,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 1,
-				grafica: "graficageneral",
-				acum:1,						
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 1,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 1,
-				grafica: "graficageneral",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 1,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 1,
-				grafica: "lotetabular",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 1,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 4,
-				grafica: "graficageneral",
-				acum:1,						
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 1,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 4,
-				grafica: "graficageneral",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 1,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 4,
-				grafica: "lotetabular",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 1,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 5,
-				grafica: "graficageneral",
-				acum:1,						
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 1,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 5,
-				grafica: "graficageneral",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 1,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 5,
-				grafica: "lotetabular",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
+	}
+	echo '];';
+?>
 
 
 
-			{
-				empresa: 2,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: "",
-				grafica: "graficageneral",
-				acum:1,						
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 2,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: "",
-				grafica: "graficageneral",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 2,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 1,
-				grafica: "graficageneral",
-				acum:1,						
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 2,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 1,
-				grafica: "graficageneral",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 2,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 1,
-				grafica: "lotetabular",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 2,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 4,
-				grafica: "graficageneral",
-				acum:1,						
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 2,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 4,
-				grafica: "graficageneral",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 2,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 4,
-				grafica: "lotetabular",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 2,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 5,
-				grafica: "graficageneral",
-				acum:1,						
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 2,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 5,
-				grafica: "graficageneral",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			},
-			{
-				empresa: 2,
-				p: "<?php echo $configuracion->valor; ?>",
-				grupoCostos: 5,
-				grafica: "lotetabular",
-				semana: $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>",
-			}
 
-];
+
 
 var 	estadoid=0;
 
 function actualizar_estado () {
 	// body...
+
+
 	if (estados[estadoid].grafica== 'lotetabular') {
 		$('#menugrafica li:eq(2) a').tab('show');	
+	}
+	else if (estados[estadoid].grafica== 'cultivos') {
+		$('#menugrafica li:eq(3) a').tab('show');
 	}
 	else{
 		$('#menugrafica li:eq(0) a').tab('show');	
 
 	}
-	estados[estadoid].semana = $('#presupuesto_semana').val()!=""? $('#presupuesto_semana').val(): "<?php echo $semanaActual; ?>"; 
-	$('#tipoGrafica').html(estados[estadoid].grafica);
-	$('#presupuesto_grupoCostos').val(estados[estadoid].grupoCostos);
-	cargarlote(estados[estadoid]);
+
+	estados[estadoid].semana=$('#presupuesto_semana').val(); 
+
+	
+	
+	if (estados[estadoid].grafica== 'cultivos') {
+		if($('#tipoGrafica').html()!=estados[estadoid].grafica || $('#presupuesto_empresa').val()!= estados[estadoid].empresa)
+		{
+			$('#tipoGrafica').html(estados[estadoid].grafica);
+			$('#presupuesto_empresa').val(estados[estadoid].empresa);
+			$('#presupuesto_grupoCostos').val(estados[estadoid].grupoCostos);	
+			cargarlote(estados[estadoid]);
+		}
+		cargarcultivo(estados[estadoid]);
+	}
+	else
+	{
+		$('#tipoGrafica').html(estados[estadoid].grafica);
+		$('#presupuesto_empresa').val(estados[estadoid].empresa);
+		$('#presupuesto_grupoCostos').val(estados[estadoid].grupoCostos);
+		cargarlote(estados[estadoid]);
+	}
 }
+
+$(window).bind("load", function() {
+   // code here
+
+   actualizar_estado ();
+   $('#atras_boton').hide();
+
+
+});
 function siguiente () {
-	if (estadoid<21) {
+	if (estadoid<estados.length-1) {
 		estadoid++;
 		$('#atras_boton').show();
 	}
-	if(estadoid==21){
+	if(estadoid==estados.length-1){
 		$('#adelante_boton').hide();
 	}
 	actualizar_estado ();

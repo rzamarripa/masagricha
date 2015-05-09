@@ -5,6 +5,7 @@
 		$diferenciaAnterior = $presupuestosacumulados["Actual"] - $presupuestosacumulados["Anterior"];
 		$porcentajeActual = ($diferenciaActual / $presupuestosacumulados["Presupuesto"]) * 100;
 		$porcentajeAnterior = ($diferenciaAnterior / $presupuestosacumulados["Presupuesto"]) * 100;
+	
 		//((13500) (100)) /12500 = 108 -100
 	?>
 	<table class="table table-condensed table-bordered table-striped table-hover">

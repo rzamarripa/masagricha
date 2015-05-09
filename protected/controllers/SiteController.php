@@ -37,7 +37,7 @@ class SiteController extends Controller
 		if($usuarioActual->tipoUsuario->nombre == "Administrador"){
 			$this->redirect('/chapapresupuestos/index.php/presupuesto/presupuestos');
 		}else if($usuarioActual->tipoUsuario->nombre == "Super"){
-			$this->render('Super');
+			$this->render('super');
 		}
 		else{
 			$this->redirect(array('login'));

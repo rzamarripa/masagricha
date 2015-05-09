@@ -1,10 +1,10 @@
 <?php
-	if(!empty($valores["grupoCostos"])){
-		$grupoCostos = GrupoCostos::model()->find("id = ". $valores["grupoCostos"]);
-	}
+    if(!empty($valores["grupoCostos"])){
+        $grupoCostos = GrupoCostos::model()->find("id = ". $valores["grupoCostos"]);
+    }
 ?> 
 <script type="text/javascript">
-	$(function () {
+    $(function () {
     $('#grafica').highcharts({
         title: {
             text: "<?php echo (isset($valores["lote"])) ? 'Lote ' . $valores["lote"] : 'Todos los Lotes'; ?>" ,
@@ -40,20 +40,20 @@
             borderWidth: 1
         },
         series: [<?php $temporadaActual = $datos[0]["temporada"];
-						foreach($configuraciones as $config){
-						?>
-			        	{
-				        	name:'<?php echo $config->valor; ?>',
-				        	data: [<?php
-					        				foreach($datos as $dato){
-					        					if($config->valor == $dato["temporada"]){
-															echo number_format($dato["importe"],2,".","") . ", ";
-														}
-													}
-												?>
-												],
-			        	},
-			    <?php } ?>]
+                        foreach($configuraciones as $config){
+                        ?>
+                        {
+                            name:'<?php echo $config->valor; ?>',
+                            data: [<?php
+                                            foreach($datos as $dato){
+                                                if($config->valor == $dato["temporada"]){
+                                                            echo number_format($dato["importe"],2,".","") . ", ";
+                                                        }
+                                                    }
+                                                ?>
+                                                ],
+                        },
+                <?php } ?>]
     });
 });
 </script>

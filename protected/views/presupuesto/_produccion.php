@@ -1,14 +1,14 @@
 <?php
-	if(!empty($valores["empresa"])){
-		$empresa = Empresa::model()->find("id = ". $valores["empresa"]);
-	}
+    if(!empty($valores["empresa"])){
+        $empresa = Empresa::model()->find("id = ". $valores["empresa"]);
+    }
 
 
 ?>
 <script type="text/javascript">
-	$( "li" ).removeClass("active");
-	$( "#manoobra" ).addClass("active");
-	$(function () {
+    $( "li" ).removeClass("active");
+    $( "#manoobra" ).addClass("active");
+    $(function () {
     $('#grafica').highcharts({
         title: {
             text: '<?php echo $empresa->nombre; ?>',
@@ -45,46 +45,46 @@
         },
         series: [
 
-        	{
-	        	name:'Presupuesto',
-	        	data: [
-		        				<?php
-			        				if(isset($presupuestoFormateado["Presupuesto"])){
-			        					foreach($presupuestoFormateado["Presupuesto"] as $p){
-	        									echo $p['importe'] .",";
-												}
-											}
-	        					?>
+            {
+                name:'Presupuesto',
+                data: [
+                                <?php
+                                    if(isset($presupuestoFormateado["Presupuesto"])){
+                                        foreach($presupuestoFormateado["Presupuesto"] as $p){
+                                                echo $p['importe'] .",";
+                                                }
+                                            }
+                                ?>
 
-	        	],
-        	},
-        	{
-	        	name:'Anterior',
-	        	data: [
-		        				<?php
-			        				if(isset($presupuestoFormateado["Anterior"])){
-				        				foreach($presupuestoFormateado["Anterior"] as $p){
-		        									echo $p['importe'] .",";
-													}
-			        				}
+                ],
+            },
+            {
+                name:'Anterior',
+                data: [
+                                <?php
+                                    if(isset($presupuestoFormateado["Anterior"])){
+                                        foreach($presupuestoFormateado["Anterior"] as $p){
+                                                    echo $p['importe'] .",";
+                                                    }
+                                    }
 
-	        					?>
+                                ?>
 
-	        	],
-        	},
-        	{
-	        	name:'Actual',
-	        	data: [
-		        				<?php
-			        				if(isset($presupuestoFormateado["Actual"])){
-			        					foreach($presupuestoFormateado["Actual"] as $p){
-	        									echo $p['importe'] .",";
-												}
-											}
-	        					?>
+                ],
+            },
+            {
+                name:'Actual',
+                data: [
+                                <?php
+                                    if(isset($presupuestoFormateado["Actual"])){
+                                        foreach($presupuestoFormateado["Actual"] as $p){
+                                                echo $p['importe'] .",";
+                                                }
+                                            }
+                                ?>
 
-	        	],
-        	},
+                ],
+            },
         ]
     });
 });
